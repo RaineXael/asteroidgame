@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0948a71c646d7b397a856f57ad31f757, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -181,10 +181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227c901187f27ed489d5cb9861a892db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  maxHealth: 100
+  maxEnergy: 100
   rb: {fileID: 362539519702127936}
   rotateSpeed: 180
-  maxThrust: 10
+  maxThrust: 12
   modelTransform: {fileID: 1959424414628898017}
+  maxSpeed: 13
 --- !u!54 &362539519702127936
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -194,7 +197,7 @@ Rigidbody:
   m_GameObject: {fileID: 2441928762464476509}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.1
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -279,7 +282,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0948a71c646d7b397a856f57ad31f757, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
