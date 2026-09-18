@@ -6,7 +6,9 @@ public class Ship : MonoBehaviour
     private float health;
     public float maxEnergy = 100f;
     private float energy;
-
+    //Gravitational pull of the planets. A velocity vector added to
+    //the ship after their thrust (after player input in the Player's case)
+    protected Vector3 planetGrav;
     public virtual void Start()
     {
         health = maxHealth;
@@ -33,4 +35,15 @@ public class Ship : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    /// <summary>
+    /// Sets the planetGrav vector of this object.
+    /// We may need to change this if we have multiple planets
+    /// interacting with the same ship.
+    /// </summary>
+    public void SetPlanetGravity(Vector3 gravVelocity)
+    {
+        planetGrav = gravVelocity;
+    }
+
 }

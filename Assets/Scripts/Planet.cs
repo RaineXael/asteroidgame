@@ -8,18 +8,45 @@ public class Planet : MonoBehaviour
     public float radius = 2f;
     //Radius (not including planet radius) that the gravitational field will have.
     public float gravFieldRadius = 5f;
+    //How much the planet's grav. field acts upon ships.
+    public float gravForce;
+    //Sphere model to scale up.
+    public Transform modelTransform;
+    ///Trigger that detects incoming and outgoing ships to apply gravity.
+    public SphereCollider gravTrigger;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        transform.localScale = Vector3.one * radius * 2;
+        modelTransform.localScale = Vector3.one * radius * 2;
+        gravTrigger.radius = radius + gravFieldRadius;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out Ship ship))
+        {
+            Vector3 offset = (transform.position - ship.transform.position).normalized;
+            ship.SetPlanetGravity(offset * gravForce); // Safely execute methods on the class
+            Debug.LogWarning(other);
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+         if (other.TryGetComponent(out Ship ship))
+        {
+            //Should be changed if we want multiple grav. fields to touch.
+            ship.SetPlanetGravity(Vector3.zero); // Safely execute methods on the class
+            Debug.LogWarning(other);
+        }
     }
 
     void OnDrawGizmos()

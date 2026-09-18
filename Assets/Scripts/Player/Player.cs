@@ -20,6 +20,9 @@ public class Player : Ship
     //Ship's X Rotation, changes when turning. Visual only. 
     public float xRotation;
 
+    
+
+
     public override void Start()
     {
         base.Start();
@@ -39,6 +42,7 @@ public class Player : Ship
             rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
         }
 
+        rb.linearVelocity += planetGrav * Time.deltaTime;
 
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
         //Set model rotation to currentAngle
