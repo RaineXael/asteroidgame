@@ -42,7 +42,7 @@ public class Player : Ship
 
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
         //Set model rotation to currentAngle
-        modelTransform.eulerAngles = new Vector3(xRotation * 30.0f, 0, Mathf.Rad2Deg * currentAngle);
+        modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, Mathf.Rad2Deg * currentAngle);
         
 
     }
