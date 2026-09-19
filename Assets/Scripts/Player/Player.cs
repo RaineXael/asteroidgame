@@ -25,7 +25,7 @@ public class Player : Ship
 
 
     public GameObject bulletPrefab;
-    public float shootTimer;
+    private float shootTimer;
     public float shootTime = 0.166f;
 
     public override void Start()
@@ -56,28 +56,33 @@ public class Player : Ship
         //Mousecursor to world coordinate (for mouse shoot)
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = 10f; // distance from camera, must be != 0 to work
+        
+        //The position of the mouse in global position.
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         
+        //The offset of the mouse from the player (mouseposition in local space)
         Vector3 mouseLookVector = worldPosition - transform.position;
 
+
         //Shoot Logic
-        // if (Input.GetButton("Fire1"))
-        // {
-        //     shootTimer -= Time.deltaTime;
-        //     if(shootTimer <= 0)
-        //     {
-        //         SpawnBullet(mouseLookVector.normalized);
-        //         shootTimer = shootTime;
-        //     }
-        // }
+        if (Input.GetButton("Fire1"))
+        {
+            shootTimer -= Time.deltaTime;
+            if(shootTimer <= 0)
+            {
+                SpawnBullet(mouseLookVector.normalized, rb.linearVelocity);
+                shootTimer = shootTime;
+            }
+        }
     }
 
 
-    void SpawnBullet(Vector3 direction)
+    void SpawnBullet(Vector3 direction, Vector3 additionalVelocity)
     {
-        GameObject instance = Instantiate(bulletPrefab);
-        instance.transform.position = transform.position;
+        GameObject instance = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         //Setup bullet params here
+        Bullet bullet = instance.GetComponent<Bullet>();
+        bullet.SetData(direction, additionalVelocity);
     }
 
 }

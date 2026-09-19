@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 209467967655662745}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,10 @@ MonoBehaviour:
   modelTransform: {fileID: 1959424414628898017}
   maxSpeed: 15
   xRotation: 0
+  playerCam: {fileID: 0}
+  bulletPrefab: {fileID: 8508319864498557035, guid: c1c02aa3c565c15dcb078fc563805cbd, type: 3}
+  shootTimer: 0
+  shootTime: 0.166
 --- !u!54 &362539519702127936
 Rigidbody:
   m_ObjectHideFlags: 0
