@@ -35,7 +35,6 @@ public class Planet : MonoBehaviour
         {
             Vector3 offset = (transform.position - ship.transform.position).normalized;
             ship.SetPlanetGravity(offset * gravForce); // Safely execute methods on the class
-            Debug.LogWarning(other);
         }
 
     }
@@ -45,7 +44,6 @@ public class Planet : MonoBehaviour
         {
             //Should be changed if we want multiple grav. fields to touch.
             ship.SetPlanetGravity(Vector3.zero); // Safely execute methods on the class
-            Debug.LogWarning(other);
         }
     }
 

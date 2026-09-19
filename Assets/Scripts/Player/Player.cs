@@ -21,7 +21,12 @@ public class Player : Ship
     public float xRotation;
 
     
+    public PlayerCamera playerCam;
 
+
+    public GameObject bulletPrefab;
+    public float shootTimer;
+    public float shootTime = 0.166f;
 
     public override void Start()
     {
@@ -39,7 +44,7 @@ public class Player : Ship
         if (thrust != 0)
         {
             rb.linearVelocity += new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0) * maxThrust * thrust * Time.deltaTime;
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); 
         }
 
         rb.linearVelocity += planetGrav * Time.deltaTime;
@@ -48,6 +53,31 @@ public class Player : Ship
         //Set model rotation to currentAngle
         modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, Mathf.Rad2Deg * currentAngle);
         
+        //Mousecursor to world coordinate (for mouse shoot)
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        mouseScreenPosition.z = 10f; // distance from camera, must be != 0 to work
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        
+        Vector3 mouseLookVector = worldPosition - transform.position;
 
+        //Shoot Logic
+        // if (Input.GetButton("Fire1"))
+        // {
+        //     shootTimer -= Time.deltaTime;
+        //     if(shootTimer <= 0)
+        //     {
+        //         SpawnBullet(mouseLookVector.normalized);
+        //         shootTimer = shootTime;
+        //     }
+        // }
     }
+
+
+    void SpawnBullet(Vector3 direction)
+    {
+        GameObject instance = Instantiate(bulletPrefab);
+        instance.transform.position = transform.position;
+        //Setup bullet params here
+    }
+
 }
