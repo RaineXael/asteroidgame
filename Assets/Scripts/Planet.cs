@@ -12,8 +12,10 @@ public class Planet : MonoBehaviour
     public float gravForce;
     //Sphere model to scale up.
     public Transform modelTransform;
+    public Transform gravRadiusModelTransform;
     ///Trigger that detects incoming and outgoing ships to apply gravity.
     public SphereCollider gravTrigger;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,7 @@ public class Planet : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         modelTransform.localScale = Vector3.one * radius * 2;
         gravTrigger.radius = radius + gravFieldRadius;
+        gravRadiusModelTransform.localScale = Vector3.one * (radius + gravFieldRadius) * 2;
     }
 
     // Update is called once per frame

@@ -20,9 +20,9 @@ public class Player : Ship
     //Ship's X Rotation, changes when turning. Visual only. 
     public float xRotation;
 
-    
     public PlayerCamera playerCam;
 
+    public ParticleSystem thrustParticle;
 
     public GameObject bulletPrefab;
     private float shootTimer;
@@ -44,22 +44,37 @@ public class Player : Ship
         if (thrust != 0)
         {
             rb.linearVelocity += new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0) * maxThrust * thrust * Time.deltaTime;
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed); 
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
         }
+
+        //Particle Systems
+        if (thrust > 0)
+        {
+            if (!thrustParticle.isPlaying)
+            {
+                thrustParticle.Play();
+            }
+
+        }
+        else
+        {
+            thrustParticle.Stop();
+        }
+
 
         rb.linearVelocity += planetGrav * Time.deltaTime;
 
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
         //Set model rotation to currentAngle
         modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, Mathf.Rad2Deg * currentAngle);
-        
+
         //Mousecursor to world coordinate (for mouse shoot)
         Vector3 mouseScreenPosition = Input.mousePosition;
         mouseScreenPosition.z = 10f; // distance from camera, must be != 0 to work
-        
+
         //The position of the mouse in global position.
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        
+
         //The offset of the mouse from the player (mouseposition in local space)
         Vector3 mouseLookVector = worldPosition - transform.position;
 
@@ -68,7 +83,7 @@ public class Player : Ship
         if (Input.GetButton("Fire1"))
         {
             shootTimer -= Time.deltaTime;
-            if(shootTimer <= 0)
+            if (shootTimer <= 0)
             {
                 SpawnBullet(mouseLookVector.normalized, rb.linearVelocity);
                 shootTimer = shootTime;
