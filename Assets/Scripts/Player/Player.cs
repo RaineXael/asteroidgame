@@ -85,7 +85,7 @@ public class Player : Ship
             shootTimer -= Time.deltaTime;
             if (shootTimer <= 0)
             {
-                SpawnBullet(mouseLookVector.normalized, rb.linearVelocity);
+                SpawnBullet(new Vector3(mouseLookVector.x, mouseLookVector.y, 0).normalized, rb.linearVelocity);
                 shootTimer = shootTime;
             }
         }
@@ -98,6 +98,7 @@ public class Player : Ship
         //Setup bullet params here
         Bullet bullet = instance.GetComponent<Bullet>();
         bullet.SetData(direction, additionalVelocity);
+        Debug.Log(direction);
     }
 
 }
