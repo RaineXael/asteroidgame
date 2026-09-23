@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Ship : MonoBehaviour
@@ -8,7 +9,8 @@ public class Ship : MonoBehaviour
     private float energy;
     //Gravitational pull of the planets. A velocity vector added to
     //the ship after their thrust (after player input in the Player's case)
-    protected Vector3 planetGrav;
+    protected List<Planet> planetsInside = new List<Planet>(); 
+    // protected Vector3 planetGrav;
     public virtual void Start()
     {
         health = maxHealth;
@@ -36,14 +38,28 @@ public class Ship : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Sets the planetGrav vector of this object.
-    /// We may need to change this if we have multiple planets
-    /// interacting with the same ship.
-    /// </summary>
-    public void SetPlanetGravity(Vector3 gravVelocity)
+    public Vector3 GetTotalPlanetGravity()
     {
-        planetGrav = gravVelocity;
+        Vector3 totalGravity = Vector3.zero;
+
+        foreach(Planet planet in planetsInside)
+        {
+            Vector3 offset = (planet.transform.position - transform.position).normalized;
+            totalGravity += offset * planet.gravForce;
+         
+        }
+
+        return totalGravity;
+    }
+
+
+    public void AddToPlanetList(Planet planet)
+    {
+        planetsInside.Add(planet);
+    }
+    public void RemoveFromPlanetList(Planet planet)
+    {
+        planetsInside.Remove(planet);
     }
 
 }

@@ -26,28 +26,23 @@ public class Planet : MonoBehaviour
         gravRadiusModelTransform.localScale = Vector3.one * (radius + gravFieldRadius) * 2;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Ship ship))
         {
-            Vector3 offset = (transform.position - ship.transform.position).normalized;
-            ship.SetPlanetGravity(offset * gravForce); // Safely execute methods on the class
+            ship.AddToPlanetList(this);
         }
-
     }
+
     private void OnTriggerExit(Collider other)
     {
-         if (other.TryGetComponent(out Ship ship))
+        //Remove planet from the ship's list.
+        if (other.TryGetComponent(out Ship ship))
         {
-            //Should be changed if we want multiple grav. fields to touch.
-            ship.SetPlanetGravity(Vector3.zero); // Safely execute methods on the class
+            ship.RemoveFromPlanetList(this);
         }
+
     }
 
     void OnDrawGizmos()

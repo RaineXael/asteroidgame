@@ -62,7 +62,7 @@ public class Player : Ship
         }
 
 
-        rb.linearVelocity += planetGrav * Time.deltaTime;
+        rb.linearVelocity += GetTotalPlanetGravity() * Time.deltaTime;
 
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
         //Set model rotation to currentAngle
