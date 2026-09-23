@@ -4950,6 +4950,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227c901187f27ed489d5cb9861a892db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  alignment: 1
   maxHealth: 100
   maxEnergy: 100
   rotateSpeed: 180

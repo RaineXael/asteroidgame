@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private Alignment alignment;
     [SerializeField] private float maxLifetime = 5.0f;
     [SerializeField] private float speed = 10.0f;
     private Rigidbody rb;
@@ -20,10 +21,12 @@ public class Bullet : MonoBehaviour
     /// <param name="direction">Normalized direction vector the bullet will move.</param>
     /// <param name="extraVelocity">Velocity vector to add to movement. Usually for
     /// adding the spawner's velocity for accuracy.</param>
-    public void SetData(Vector3 direction, Vector3 extraVelocity)
+    /// <param name="alignment">Alignment of the owner of the bullet.</param>
+    public void SetData(Vector3 direction, Vector3 extraVelocity, Alignment alignment)
     {
         directionVector = direction;
         this.extraVelocity = extraVelocity;
+        this.alignment = alignment;
     }
 
     public void Update()
@@ -33,6 +36,13 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        
+        if (other.TryGetComponent(out Ship ship))
+        {
+            if (ship.alignment != alignment)
+            {
+                ship.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
     }
 }

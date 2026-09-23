@@ -102,7 +102,7 @@ public class Player : Ship
         GameObject instance = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         //Setup bullet params here
         Bullet bullet = instance.GetComponent<Bullet>();
-        bullet.SetData(direction, additionalVelocity);
+        bullet.SetData(direction, additionalVelocity, alignment);
         Debug.Log(direction);
     }
 

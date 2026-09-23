@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Alignment
+{
+    ENEMY,
+    FRIENDLY
+}
+
 public class Ship : MonoBehaviour
 {
     [Header("Ship Baseclass Variables")]
-    
+    public Alignment alignment;
     public float maxHealth = 100f;
     private float health;
     public float maxEnergy = 100f;
