@@ -506,7 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
   effectsDisabled: 0
-  distance: -15
+  distance: -25
   target: {fileID: 631310539661695903}
   fovLerpSpeed: 3
 --- !u!1 &987386856
@@ -1072,11 +1072,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1502423595175808689, guid: f370ed965d972cd8b8a2550b05124584, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -61.6
+      value: -27
       objectReference: {fileID: 0}
     - target: {fileID: 1502423595175808689, guid: f370ed965d972cd8b8a2550b05124584, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.6
+      value: -81.1
       objectReference: {fileID: 0}
     - target: {fileID: 1502423595175808689, guid: f370ed965d972cd8b8a2550b05124584, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1116,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5863490654782448777, guid: f370ed965d972cd8b8a2550b05124584, type: 3}
       propertyPath: radius
-      value: 19.4
+      value: 58.7
       objectReference: {fileID: 0}
     - target: {fileID: 5863490654782448777, guid: f370ed965d972cd8b8a2550b05124584, type: 3}
       propertyPath: gravFieldRadius
@@ -1698,6 +1698,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 912799160}
+    - target: {fileID: 362539519702127936, guid: e3dae030f7fc0b3dc93e9e8703f95315, type: 3}
+      propertyPath: m_LinearDamping
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 1959424414628898017, guid: e3dae030f7fc0b3dc93e9e8703f95315, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

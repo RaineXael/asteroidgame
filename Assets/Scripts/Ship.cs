@@ -3,14 +3,16 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
+    [Header("Ship Baseclass Variables")]
+    
     public float maxHealth = 100f;
     private float health;
     public float maxEnergy = 100f;
     private float energy;
-    //Gravitational pull of the planets. A velocity vector added to
-    //the ship after their thrust (after player input in the Player's case)
+    //List of the planets that are affecting the ship. Used to calculate
+    //extra velocities for their gravity.
     protected List<Planet> planetsInside = new List<Planet>(); 
-    // protected Vector3 planetGrav;
+
     public virtual void Start()
     {
         health = maxHealth;
@@ -38,6 +40,11 @@ public class Ship : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Iterates through all the planets in the planetsInside list and
+    /// calculates the sum of their gravity as a vector.
+    /// </summary>
+    /// <returns>The vector for the gravity of all the planets in the planetsInside list. </returns>
     public Vector3 GetTotalPlanetGravity()
     {
         Vector3 totalGravity = Vector3.zero;

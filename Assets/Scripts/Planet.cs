@@ -29,6 +29,7 @@ public class Planet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //Adds planet from the colliding ship's list.
         if (other.TryGetComponent(out Ship ship))
         {
             ship.AddToPlanetList(this);
@@ -37,7 +38,7 @@ public class Planet : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        //Remove planet from the ship's list.
+        //Removes planet from the colliding ship's list.
         if (other.TryGetComponent(out Ship ship))
         {
             ship.RemoveFromPlanetList(this);

@@ -42,7 +42,7 @@ public class PlayerCamera : MonoBehaviour
         if (!effectsDisabled)
         {
             //Set FOV based on target velocity
-            float targetFOV = initialFOV + targetRigidBody.linearVelocity.magnitude / target.maxSpeed * maxFOVAddition;
+            float targetFOV = initialFOV + targetRigidBody.linearVelocity.magnitude / target.maxThrustSpeed * maxFOVAddition;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, Mathf.Clamp(targetFOV, initialFOV,initialFOV+maxFOVAddition),Time.deltaTime * fovLerpSpeed);
 
             
