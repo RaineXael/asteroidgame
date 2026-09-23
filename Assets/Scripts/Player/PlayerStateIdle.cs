@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class PlayerStateIdle : PlayerState
 {
+    //Example empty State Machine class (template).
     public override void OnEnter(Player player)
     {
         
