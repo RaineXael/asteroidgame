@@ -7,6 +7,7 @@ public enum Alignment
     FRIENDLY
 }
 
+[RequireComponent(typeof(Rigidbody))]
 public class Ship : MonoBehaviour
 {
     [Header("Ship Baseclass Variables")]
@@ -18,13 +19,25 @@ public class Ship : MonoBehaviour
     //List of the planets that are affecting the ship. Used to calculate
     //extra velocities for their gravity.
     protected List<Planet> planetsInside = new List<Planet>(); 
+    [SerializeField] protected float rotateSpeed = 10.0f;
+    //Acceleration of the forward / backward thrust.
+    [SerializeField] protected float thrustAcceleration = 15.0f;
+    //The max magnitude the player's velocity can have by input.
+    //Additional planet velocity go beyond this limit. 
+    public float maxThrustSpeed = 30.0f;
+    protected Rigidbody rb;
 
     public virtual void Start()
     {
+        rb = GetComponent<Rigidbody>();
         health = maxHealth;
         energy = maxEnergy;
     }
 
+    public virtual void Update()
+    {
+        
+    }
 
     /// <summary>
     /// Triggered when the ship takes damage.

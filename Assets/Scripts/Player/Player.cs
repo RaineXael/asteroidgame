@@ -5,15 +5,9 @@ public class Player : Ship
 
     [Header("Player Class Parameters")]
     
-    [SerializeField] private float rotateSpeed = 10.0f;
-    //Acceleration of the forward / backward thrust.
-    [SerializeField] private float thrustAcceleration = 15.0f;
-    //The max magnitude the player's velocity can have by input.
-    //Additional planet velocity go beyond this limit. 
-    public float maxThrustSpeed = 30.0f;
-    //Ship's X Rotation, changes when turning. Visual only. 
-    private float shootTimer;
+    
     [SerializeField] private float shootCooldown = 0.166f;
+    private float shootTimer;
     //Current Angle the player is facing (in radians)
     private float currentAngle;
     //X Rotation of the model, cosmetic only
@@ -25,15 +19,15 @@ public class Player : Ship
     [SerializeField] private PlayerCamera playerCam;
     [SerializeField] private ParticleSystem thrustParticle;
     [SerializeField] private GameObject bulletPrefab;
-    private Rigidbody rb;
+    
     
     public override void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        
         base.Start();
     }
 
-    void Update()
+    public override void Update()
     {
         //Player Input
         float thrust = Input.GetAxis("Vertical");
