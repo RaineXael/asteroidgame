@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyStateIdle : EnemyState
+public class EnemyStateAggressive : EnemyState
 {
     //Example empty State Machine class (template).
     public override void OnEnter(Enemy enemy)

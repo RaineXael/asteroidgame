@@ -59,8 +59,7 @@ public class Player : Ship
             }
         }
 
-        //Add any planet gravity to the velocity
-        rb.linearVelocity += GetTotalPlanetGravity() * Time.deltaTime;
+        base.Update();
 
         //Lerp Model's x rotation to the rotation speed (so rotations don't look static)
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);

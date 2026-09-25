@@ -24,4 +24,11 @@ public class Enemy : Ship
         currentState.OnUpdate(this);
     }
 
+    public override void OnTouchDamageable(float amount)
+    {
+        //Send it to the state. The state determines if the enemy takes damage
+        //in case there's a state that needs invulnerability.
+        currentState.OnTouchDamageable(this, amount);
+    }
+
 }

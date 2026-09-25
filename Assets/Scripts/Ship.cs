@@ -36,11 +36,24 @@ public class Ship : MonoBehaviour
 
     public virtual void Update()
     {
+        //Add any planet gravity to the velocity
+        rb.linearVelocity += GetTotalPlanetGravity() * Time.deltaTime;
+
         
     }
 
     /// <summary>
-    /// Triggered when the ship takes damage.
+    /// Triggered when touching a damaging object (bullets, planets at high velocity, etc).
+    /// Can be overridden to set custom behaviour on hit.
+    /// </summary>
+    public virtual void OnTouchDamageable(float amount)
+    {
+        TakeDamage(amount);
+    }
+
+    /// <summary>
+    /// Method that gives damage to the ship. Triggers "OnDeath()" when health is less than 0
+    /// after subtraction.
     /// </summary> 
     public void TakeDamage(float amount)
     {
