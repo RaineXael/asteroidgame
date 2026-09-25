@@ -13,7 +13,8 @@ public class EnemyStateIdle : EnemyState
     }
     public override void OnUpdate(Enemy enemy)
     {
-        
+        enemy.ChangeRotation(1.0f);
+        Debug.LogWarning("AAAA!!");
     }
     public override void OnTouchDamageable(Enemy enemy, float amount)
     {

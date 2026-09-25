@@ -141,6 +141,10 @@ MonoBehaviour:
   alignment: 0
   maxHealth: 100
   maxEnergy: 100
+  rotateSpeed: 180
+  thrustAcceleration: 15
+  modelTransform: {fileID: 4655076424632823244}
+  maxThrustSpeed: 30
 --- !u!54 &362539519702127936
 Rigidbody:
   m_ObjectHideFlags: 0

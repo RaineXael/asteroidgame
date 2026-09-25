@@ -8,14 +8,13 @@ public class Player : Ship
     
     [SerializeField] private float shootCooldown = 0.166f;
     private float shootTimer;
-    //Current Angle the player is facing (in radians)
-    private float currentAngle;
+    
     //X Rotation of the model, cosmetic only
     private float xRotation;
 
     [Header("Player Class Object References")]
 
-    [SerializeField] private Transform modelTransform; //Transform of the mesh that gets rotated to indicate direction
+    
     [SerializeField] private PlayerCamera playerCam;
     [SerializeField] private ParticleSystem thrustParticle;
     [SerializeField] private GameObject bulletPrefab;
@@ -30,21 +29,14 @@ public class Player : Ship
     public override void Update()
     {
         //Player Input
-        float thrust = Input.GetAxis("Vertical");
-        float rotate = Input.GetAxis("Horizontal");
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        //Changing the currentAngle based on input (in radians)
-        currentAngle -= Mathf.Deg2Rad * rotateSpeed * rotate * Time.deltaTime;
 
-        //Forward & Backward thrust on Vertical input
-        if (thrust != 0)
-        {
-            rb.linearVelocity += new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0) * thrustAcceleration * thrust * Time.deltaTime;
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxThrustSpeed);
-        }
+        ChangeRotation(input.x);
+        Thrust(input.y);
 
         //Particle Systems
-        if (thrust > 0)
+        if (input.y > 0)
         {
             if (!thrustParticle.isPlaying)
             {
@@ -62,9 +54,10 @@ public class Player : Ship
         base.Update();
 
         //Lerp Model's x rotation to the rotation speed (so rotations don't look static)
-        xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
+        xRotation = Mathf.Lerp(xRotation, input.x, Time.deltaTime * 2f);
+        
         //Set model rotation to currentAngle
-        modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, Mathf.Rad2Deg * currentAngle);
+        modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, modelTransform.eulerAngles.z);
 
         //Mousecursor to world coordinate (for mouse shoot)
         Vector3 mouseScreenPosition = Input.mousePosition;
