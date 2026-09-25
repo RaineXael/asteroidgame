@@ -3,48 +3,50 @@ using UnityEngine;
 public class Player : Ship
 {
 
-    public Rigidbody rb;
-    public float rotateSpeed = 10.0f;
+    [Header("Player Class Parameters")]
+    
+    [SerializeField] private float rotateSpeed = 10.0f;
     //Acceleration of the forward / backward thrust.
-    public float maxThrust = 10.0f;
-
-    private float currentAngle;
-
-    //Object that gets rotated to indicate direction
-    public Transform modelTransform;
-
+    [SerializeField] private float thrustAcceleration = 15.0f;
     //The max magnitude the player's velocity can have by input.
-    //Additional planet velocity can bypass this (unimplemented yet)
-    public float maxSpeed = 50.0f;
-
+    //Additional planet velocity go beyond this limit. 
+    public float maxThrustSpeed = 30.0f;
     //Ship's X Rotation, changes when turning. Visual only. 
-    public float xRotation;
-
-    public PlayerCamera playerCam;
-
-    public ParticleSystem thrustParticle;
-
-    public GameObject bulletPrefab;
     private float shootTimer;
-    public float shootTime = 0.166f;
+    [SerializeField] private float shootCooldown = 0.166f;
+    //Current Angle the player is facing (in radians)
+    private float currentAngle;
+    //X Rotation of the model, cosmetic only
+    private float xRotation;
 
+    [Header("Player Class Object References")]
+
+    [SerializeField] private Transform modelTransform; //Transform of the mesh that gets rotated to indicate direction
+    [SerializeField] private PlayerCamera playerCam;
+    [SerializeField] private ParticleSystem thrustParticle;
+    [SerializeField] private GameObject bulletPrefab;
+    private Rigidbody rb;
+    
     public override void Start()
     {
+        rb = GetComponent<Rigidbody>();
         base.Start();
     }
 
     void Update()
     {
-        //Input & angle changes
+        //Player Input
         float thrust = Input.GetAxis("Vertical");
         float rotate = Input.GetAxis("Horizontal");
+
+        //Changing the currentAngle based on input (in radians)
         currentAngle -= Mathf.Deg2Rad * rotateSpeed * rotate * Time.deltaTime;
 
         //Forward & Backward thrust on Vertical input
         if (thrust != 0)
         {
-            rb.linearVelocity += new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0) * maxThrust * thrust * Time.deltaTime;
-            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxSpeed);
+            rb.linearVelocity += new Vector3(Mathf.Cos(currentAngle), Mathf.Sin(currentAngle), 0) * thrustAcceleration * thrust * Time.deltaTime;
+            rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, maxThrustSpeed);
         }
 
         //Particle Systems
@@ -54,16 +56,19 @@ public class Player : Ship
             {
                 thrustParticle.Play();
             }
-
         }
         else
         {
-            thrustParticle.Stop();
+            if (thrustParticle.isPlaying)
+            {
+                thrustParticle.Stop();
+            }
         }
 
+        //Add any planet gravity to the velocity
+        rb.linearVelocity += GetTotalPlanetGravity() * Time.deltaTime;
 
-        rb.linearVelocity += planetGrav * Time.deltaTime;
-
+        //Lerp Model's x rotation to the rotation speed (so rotations don't look static)
         xRotation = Mathf.Lerp(xRotation, rotate, Time.deltaTime * 2f);
         //Set model rotation to currentAngle
         modelTransform.eulerAngles = new Vector3(xRotation * -30.0f, 0, Mathf.Rad2Deg * currentAngle);
@@ -86,7 +91,7 @@ public class Player : Ship
             if (shootTimer <= 0)
             {
                 SpawnBullet(new Vector3(mouseLookVector.x, mouseLookVector.y, 0).normalized, rb.linearVelocity);
-                shootTimer = shootTime;
+                shootTimer = shootCooldown;
             }
         }
     }
