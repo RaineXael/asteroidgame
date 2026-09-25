@@ -4963,15 +4963,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5021,6 +5021,26 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: efa4c4e8e598f274c9c1e1032aab980f, type: 2}
+    - target: {fileID: -7024717358460447024, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -7024717358460447024, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -7024717358460447024, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7024717358460447024, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7024717358460447024, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
     - target: {fileID: -2068979826139393208, guid: edddad1d019d26640bdfac0338ca4cd5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
