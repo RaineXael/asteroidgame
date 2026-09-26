@@ -24,8 +24,8 @@ public class Enemy : Ship
 
     public override void Update()
     {
-        base.Update();
         currentState.OnUpdate(this);
+        base.Update();
     }
 
     public override void OnTouchDamageable(float amount)
