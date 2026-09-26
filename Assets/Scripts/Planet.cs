@@ -15,7 +15,9 @@ public class Planet : MonoBehaviour
     public Transform gravRadiusModelTransform;
     ///Trigger that detects incoming and outgoing ships to apply gravity.
     public SphereCollider gravTrigger;
+    
 
+    [SerializeField] private Gradient possibleColors;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,8 +26,32 @@ public class Planet : MonoBehaviour
         modelTransform.localScale = Vector3.one * radius * 2;
         gravTrigger.radius = radius + gravFieldRadius;
         gravRadiusModelTransform.localScale = Vector3.one * (radius + gravFieldRadius) * 2;
+        SetPlanetMaterial();
     }
 
+    private void SetPlanetMaterial()
+    {
+        //Fetch the Material from the Renderer of the GameObject
+        Material modelMaterial = modelTransform.gameObject.GetComponent<MeshRenderer>().material;
+        
+        float maxOffset = 0.15f;
+
+        //evaluate color on gradient
+        float baseValue = Random.Range(0f,1f);
+        float subValue = baseValue + Random.Range(-maxOffset,maxOffset);
+        float landValue = baseValue + 0.5f;
+
+        //Make values loop around
+        if (subValue > 1){ subValue -= 1;}
+        if (subValue < 0){ subValue += 1;}
+        if (landValue > 1){ landValue -= 1;}
+        if (landValue < 0){ landValue += 1;}
+
+        modelMaterial.SetColor("_BaseColor", possibleColors.Evaluate(baseValue));
+        modelMaterial.SetColor("_SubColor", possibleColors.Evaluate(subValue));
+        modelMaterial.SetColor("_LandColor", possibleColors.Evaluate(landValue));
+        modelMaterial.SetFloat("_LandScale", radius);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
