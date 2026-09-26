@@ -143,6 +143,36 @@ MonoBehaviour:
   modelTransform: {fileID: 375874850354112052}
   gravRadiusModelTransform: {fileID: 3922171215924497587}
   gravTrigger: {fileID: 253969221869471339}
+  possibleColors:
+    serializedVersion: 2
+    key0: {r: 0.110447995, g: 0.13662916, b: 0.624, a: 1}
+    key1: {r: 0.3371935, g: 0.16635296, b: 0.4117647, a: 1}
+    key2: {r: 0.617, g: 0.16658999, b: 0.16658999, a: 0}
+    key3: {r: 0.617, g: 0.3797623, b: 0.144378, a: 0}
+    key4: {r: 0.10872103, g: 0.667, b: 0.42398444, a: 0}
+    key5: {r: 0.10986204, g: 0.5169263, b: 0.674, a: 0}
+    key6: {r: 0.110447995, g: 0.13662916, b: 0.624, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 2506
+    ctime1: 10023
+    ctime2: 19082
+    ctime3: 27949
+    ctime4: 41056
+    ctime5: 53970
+    ctime6: 63608
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 2
+    m_ColorSpace: -1
+    m_NumColorKeys: 7
+    m_NumAlphaKeys: 2
 --- !u!135 &253969221869471339
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -192,7 +222,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0442, y: 1.0442, z: 1.0442}
+  m_LocalScale: {x: 1.1497419, y: 1.1497419, z: 1.1497419}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 375874850354112052}
@@ -322,7 +352,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e3e2a92b3667b9789be5c29791f76746, type: 2}
+  - {fileID: 2100000, guid: d2a9bd067e245122c88b085bbc5dfa69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
