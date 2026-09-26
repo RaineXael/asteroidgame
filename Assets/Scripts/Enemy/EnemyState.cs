@@ -8,6 +8,7 @@ public abstract class EnemyState
     public abstract void OnExit(Enemy enemy);
     public abstract void OnUpdate(Enemy enemy);
     public abstract void OnTouchDamageable(Enemy enemy, float amount);
+    public abstract void OnFriendlyNearby(Enemy enemy);
 
 
 }
