@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyStateIdle : EnemyState
 {
+    //Enemy State before they see the player.
     public override void OnEnter(Enemy enemy)
     {
         
@@ -12,9 +13,11 @@ public class EnemyStateIdle : EnemyState
     }
     public override void OnUpdate(Enemy enemy)
     {
-        // Test behaviour
+        // Test behaviour. In reality we should either have them sit
+        //still, thrust against the gravity of a planet if any are nearby
+        //or have them move around a pre-determined radius.
         enemy.ChangeRotation(1.0f);
-        // Debug.LogWarning("AAAA!!");
+        
     }
     public override void OnTouchDamageable(Enemy enemy, float amount)
     {
